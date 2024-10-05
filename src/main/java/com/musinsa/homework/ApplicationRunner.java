@@ -1,4 +1,4 @@
-package com.musinsa.homework.common.config;
+package com.musinsa.homework;
 
 
 import com.musinsa.homework.entity.Brand;
@@ -6,7 +6,7 @@ import com.musinsa.homework.entity.Category;
 import com.musinsa.homework.entity.Item;
 import com.musinsa.homework.repository.BrandRepository;
 import com.musinsa.homework.repository.CatogoryRepository;
-import com.musinsa.homework.repository.ItemRepository;
+import com.musinsa.homework.repository.item.ItemRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
-public class DataInitializer {
+public class ApplicationRunner {
     @Bean
     @Transactional
     public CommandLineRunner initData(BrandRepository brandRepository, CatogoryRepository categoryRepository, ItemRepository itemRepository) {

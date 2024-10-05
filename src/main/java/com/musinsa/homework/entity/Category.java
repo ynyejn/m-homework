@@ -1,6 +1,7 @@
 package com.musinsa.homework.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,10 @@ public class Category {
     private LocalDateTime createdAt;
 
     public Category(String name) {
+        this.name = name;
+    }
+    public Category(Long id, String name) {
+        this.id = id;
         this.name = name;
     }
 

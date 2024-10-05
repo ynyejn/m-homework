@@ -13,11 +13,6 @@ spring:
     properties:
       hibernate:
         format_sql: true
-springdoc:
-  model-and-view-allowed: true
-  swagger-ui:
-    path : /swagger-ui.html
-    tags-sorter: alpha
 logging:
   level:
     org:
