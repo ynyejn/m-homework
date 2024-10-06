@@ -11,7 +11,10 @@ import lombok.RequiredArgsConstructor;
 
 
 @Data
-@Schema(description = "브랜드 및 상품 관리 요청 DTO")
+@Schema(description = "BrandOperation 또는 ItemOperation 중 하나만 입력되어야 합니다. " +
+                "BrandOperation은 브랜드 관리 작업 정보를 포함하고, " +
+                "ItemOperation은 상품 관리 작업 정보를 포함합니다."
+)
 public class BrandItemManagementRequestDto {
 
     @Schema(description = "브랜드 관리 작업 정보")
@@ -34,11 +37,11 @@ public class BrandItemManagementRequestDto {
     @AllArgsConstructor
     public static class BrandOperation {
 
-        @Schema(description = "브랜드 작업 유형", example = "CREATE", allowableValues = {"CREATE"}, required = true)
+        @Schema(description = "브랜드 작업 유형", example = "CREATE", allowableValues = {"CREATE"})
         @NotNull(message = "작업 유형은 필수입니다.")
         private ActionType action;
 
-        @Schema(description = "브랜드 이름", example = "Nike", required = true)
+        @Schema(description = "브랜드 이름", example = "Nike")
         @NotNull(message = "브랜드 이름은 필수입니다.")
         private String brandName;
     }
@@ -48,7 +51,7 @@ public class BrandItemManagementRequestDto {
     @RequiredArgsConstructor
     public static class ItemOperation {
 
-        @Schema(description = "상품 작업 유형", example = "UPDATE", allowableValues = {"CREATE", "UPDATE", "DELETE"}, required = true)
+        @Schema(description = "상품 작업 유형", example = "UPDATE", allowableValues = {"CREATE", "UPDATE", "DELETE"})
         @NotNull(message = "작업 유형은 필수입니다.")
         private ActionType action;
 

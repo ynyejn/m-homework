@@ -37,7 +37,7 @@ public class ItemQueryService {
                         // 카테고리 ID로 정렬하여 반환
                         map -> map.values().stream()
                                 .sorted(Comparator.comparing(item -> item.getCategory().getId()))
-                                .collect(Collectors.toList())
+                                .toList()
                 ));
         return LowestPriceByCategoryResponseDto.from(lowestPriceItemByCategory);
     }
