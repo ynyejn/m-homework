@@ -3,6 +3,8 @@ package com.musinsa.homework.repository.item;
 
 import com.musinsa.homework.entity.*;
 import com.querydsl.jpa.JPAExpressions;
+import com.querydsl.jpa.JPQLQuery;
+import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 
@@ -46,6 +48,22 @@ public class ItemRepositoryInterfaceImpl implements ItemRepositoryInterface {
                 .groupBy(item.brand.id)
                 .orderBy(item.price.sum().asc())  //브랜드별로 가격합계를 구하고 오름차순 정렬
                 .fetchFirst();
+    }
+
+    @Override
+    public List<Item> findItemsWithExtremePrice(String categoryName, boolean isMinPrice) {
+        JPAQuery<Item> query = queryFactory
+                .selectFrom(item)
+                .join(item.category, category).fetchJoin()
+                .join(item.brand, brand).fetchJoin()
+                .where(category.name.eq(categoryName));
+
+        JPQLQuery<Integer> subQuery = JPAExpressions
+                .select(isMinPrice ? item.price.min() : item.price.max())
+                .from(item)
+                .where(item.category.name.eq(categoryName));
+
+        return query.where(item.price.eq(subQuery)).fetch();
     }
 
 

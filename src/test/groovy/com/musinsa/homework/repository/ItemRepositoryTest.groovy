@@ -82,9 +82,44 @@ class ItemRepositoryTest extends Specification {
             org.hibernate.Hibernate.isInitialized(item.category)
             org.hibernate.Hibernate.isInitialized(item.brand)
         }
-        // 가격 확인
         result.collect { it.price }.sort() == [10000, 20000, 30000]
     }
+
+    def "findItemsWithExtremePrice 호출 시 해당 카테고리의 최저가 상품 목록이 반환된다."() {
+        given:
+        def categoryName = "상의"
+
+        when:
+        def result = itemRepositoryInterface.findItemsWithExtremePrice(categoryName, true)
+
+        then:
+        result.size() == 1
+        result[0].price == 10000
+    }
+
+    def "findItemsWithExtremePrice 호출 시 해당 카테고리의 최고가 상품 목록이 반환된다."() {
+        given:
+        def categoryName = "상의"
+
+        when:
+        def result = itemRepositoryInterface.findItemsWithExtremePrice(categoryName, false)
+
+        then:
+        result.size() == 1
+        result[0].price == 15000
+    }
+    def "findItemsWithExtremePrice 호출 시 해당 카테고리 이름이 없으면 빈 목록이 반환된다."() {
+        given:
+        def categoryName = "없는카테고리"
+
+        when:
+        def result = itemRepositoryInterface.findItemsWithExtremePrice(categoryName, true)
+
+        then:
+        result.size() == 0
+    }
+
+
 
 
     private void prepareTestData() {

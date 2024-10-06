@@ -5,7 +5,7 @@ import com.musinsa.homework.entity.Brand;
 import com.musinsa.homework.entity.Category;
 import com.musinsa.homework.entity.Item;
 import com.musinsa.homework.repository.BrandRepository;
-import com.musinsa.homework.repository.CatogoryRepository;
+import com.musinsa.homework.repository.CategoryRepository;
 import com.musinsa.homework.repository.item.ItemRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +19,7 @@ import java.util.List;
 public class ApplicationRunner {
     @Bean
     @Transactional
-    public CommandLineRunner initData(BrandRepository brandRepository, CatogoryRepository categoryRepository, ItemRepository itemRepository) {
+    public CommandLineRunner initData(BrandRepository brandRepository, CategoryRepository categoryRepository, ItemRepository itemRepository) {
         return args -> {
             List<Category> categories = new ArrayList<>();
             List<Brand> brands = new ArrayList<>();

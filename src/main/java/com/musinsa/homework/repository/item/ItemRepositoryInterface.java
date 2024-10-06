@@ -9,6 +9,8 @@ import java.util.List;
 
 public interface ItemRepositoryInterface {
     List<Item> getLowestPricesByCategory();
+
     Brand getLowestPriceBrand();
 
+    List<Item> findItemsWithExtremePrice(String categoryName, boolean isMinPrice);
 }

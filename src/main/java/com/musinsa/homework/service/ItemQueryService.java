@@ -1,9 +1,14 @@
 package com.musinsa.homework.service;
 
+import com.musinsa.homework.common.exception.ApiErrorCode;
+import com.musinsa.homework.common.exception.ApiException;
+import com.musinsa.homework.controller.response.CategoryPriceRangeResponseDto;
 import com.musinsa.homework.controller.response.LowestPriceBrandResponseDto;
 import com.musinsa.homework.controller.response.LowestPriceByCategoryResponseDto;
 import com.musinsa.homework.entity.Brand;
+import com.musinsa.homework.entity.Category;
 import com.musinsa.homework.entity.Item;
+import com.musinsa.homework.repository.CategoryRepository;
 import com.musinsa.homework.repository.item.ItemRepository;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -18,9 +23,10 @@ import java.util.stream.Collectors;
 @Transactional(readOnly = true)
 public class ItemQueryService {
     private final ItemRepository itemRepository;
+    private final CategoryRepository categoryRepository;
 
-    public List<Item> getLowestPricesByCategory() {
-        return itemRepository.getLowestPricesByCategory()
+    public LowestPriceByCategoryResponseDto getLowestPricesByCategory() {
+        List<Item> lowestPriceItemByCategory =  itemRepository.getLowestPricesByCategory()
                 .stream()
                 .collect(Collectors.collectingAndThen(
                         Collectors.toMap(
@@ -33,13 +39,23 @@ public class ItemQueryService {
                                 .sorted(Comparator.comparing(item -> item.getCategory().getId()))
                                 .collect(Collectors.toList())
                 ));
+        return LowestPriceByCategoryResponseDto.from(lowestPriceItemByCategory);
     }
 
-    public Brand getLowestPriceBrand() {
-        return itemRepository.getLowestPriceBrand();
+    public LowestPriceBrandResponseDto getLowestPriceBrand() {
+        Brand lowestPriceBrand = itemRepository.getLowestPriceBrand();
+        if (lowestPriceBrand == null) {
+            return LowestPriceBrandResponseDto.empty();
+        }
+        List<Item> items = itemRepository.findByBrand(lowestPriceBrand);
+        return LowestPriceBrandResponseDto.from(items);
     }
 
-    public List<Item> getItemsByBrand(Brand brand) {
-        return itemRepository.findByBrand(brand);
+    public CategoryPriceRangeResponseDto getCategoryPriceRange(String categoryName) {
+        Category category = categoryRepository.findByName(categoryName)
+                .orElseThrow(() -> new ApiException(ApiErrorCode.CATEGORY_NOT_FOUND));
+        List<Item> itemsWithMinPrice = itemRepository.findItemsWithExtremePrice(category.getName(), true);
+        List<Item> itemsWithMaxPrice = itemRepository.findItemsWithExtremePrice(category.getName(), false);
+        return CategoryPriceRangeResponseDto.of(categoryName, itemsWithMinPrice, itemsWithMaxPrice);
     }
 }

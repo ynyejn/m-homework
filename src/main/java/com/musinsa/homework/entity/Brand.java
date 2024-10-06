@@ -29,7 +29,4 @@ public class Brand {
     public Brand(String name) {
         this.name = name;
     }
-    public void updateBrand(String name) {
-        this.name = name;
-    }
 }
