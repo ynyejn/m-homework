@@ -3,6 +3,7 @@ package com.musinsa.homework.controller.api.request;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.AssertTrue;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -65,6 +66,7 @@ public class BrandItemManagementRequestDto {
         private Long categoryId;
 
         @Schema(description = "상품 가격", example = "12000")
+        @Min(value = 0, message = "상품 가격은 0 이상이어야 합니다.")
         private Integer price;
     }
 
