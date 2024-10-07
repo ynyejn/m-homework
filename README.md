@@ -99,6 +99,7 @@ src/
 │   │       │   │   ├── request/    # REST API 요청 DTO
 │   │       │   │   └── response/   # REST API 응답 DTO
 │   │       │   └── web/            # 웹 UI 컨트롤러
+│   │       │   │   └── response/   # 웹 UI 응답 DTO
 │   │       ├── entity/             # JPA 엔티티 (Brand, Item, Category)
 │   │       ├── repository/         # 데이터 접근 계층 (Repository)
 │   │       ├── service/            # 비즈니스 로직 계층
