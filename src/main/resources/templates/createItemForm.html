@@ -36,7 +36,7 @@
 
         <div id="itemFields" style="display: none;">
             <div class="form-group"  id="itemIdField">
-                <label for="itemId">상품 ID (수정/삭제 시):</label>
+                <label for="itemId">상품 (수정/삭제 시):</label>
                 <select id="itemId" class="form-control">
                     <option th:each="item : ${items}" th:value="${item.id}"
                             th:text="${item.brand.name + '/' + item.category.name + '/' + item.price + '원'}"
@@ -45,13 +45,13 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="brandId">브랜드 ID:</label>
+                <label for="brandId">브랜드 :</label>
                 <select id="brandId" class="form-control">
                     <option th:each="brand : ${brands}" th:value="${brand.id}" th:text="${brand.name}"></option>
                 </select>
             </div>
             <div class="form-group">
-                <label for="categoryId">카테고리 ID:</label>
+                <label for="categoryId">카테고리 :</label>
                 <select id="categoryId" class="form-control">
                     <option th:each="category : ${categories}" th:value="${category.id}"
                             th:text="${category.name}"></option>

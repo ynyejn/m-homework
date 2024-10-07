@@ -1,8 +1,8 @@
-package com.musinsa.homework.controller
+package com.musinsa.homework.controller.api
 
 import com.musinsa.homework.common.config.GlobalExceptionHandler
-import com.musinsa.homework.controller.request.BrandItemManagementRequestDto
-import com.musinsa.homework.controller.response.ResultResponseDto
+import com.musinsa.homework.controller.api.request.BrandItemManagementRequestDto
+import com.musinsa.homework.controller.api.response.ResultResponseDto
 import com.musinsa.homework.service.AdminApplicationService
 import org.springframework.http.MediaType
 

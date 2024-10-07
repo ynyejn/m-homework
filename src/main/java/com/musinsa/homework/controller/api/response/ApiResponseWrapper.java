@@ -1,4 +1,4 @@
-package com.musinsa.homework.controller.response;
+package com.musinsa.homework.controller.api.response;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;

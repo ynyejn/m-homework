@@ -1,14 +1,14 @@
-package com.musinsa.homework.controller.response;
+package com.musinsa.homework.controller.api.response;
 
 
 import com.musinsa.homework.common.util.PriceFormatter;
 import com.musinsa.homework.entity.Item;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
+import lombok.Getter;
 
 import java.util.List;
 
-@Data
+@Getter
 @Schema(description = "카테고리별 최저가 상품정보")
 public class LowestPriceByCategoryResponseDto {
     @Schema(description = "상품목록")

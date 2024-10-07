@@ -1,14 +1,13 @@
-package com.musinsa.homework.controller.response;
+package com.musinsa.homework.controller.api.response;
 
 import com.musinsa.homework.common.util.PriceFormatter;
 import com.musinsa.homework.entity.Item;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 
-import java.text.NumberFormat;
 import java.util.List;
-import java.util.Locale;
 import java.util.stream.Collectors;
 
 @Getter

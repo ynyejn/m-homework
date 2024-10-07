@@ -1,8 +1,8 @@
 package com.musinsa.homework.service
 
-import com.musinsa.homework.controller.request.ActionType
-import com.musinsa.homework.controller.request.BrandItemManagementRequestDto
-import com.musinsa.homework.controller.response.ResultResponseDto
+import com.musinsa.homework.controller.api.request.ActionType
+import com.musinsa.homework.controller.api.request.BrandItemManagementRequestDto
+import com.musinsa.homework.controller.api.response.ResultResponseDto
 import spock.lang.Specification
 
 

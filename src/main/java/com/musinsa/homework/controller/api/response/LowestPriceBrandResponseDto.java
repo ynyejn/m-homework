@@ -1,4 +1,4 @@
-package com.musinsa.homework.controller.response;
+package com.musinsa.homework.controller.api.response;
 
 import com.musinsa.homework.common.util.PriceFormatter;
 import com.musinsa.homework.entity.Item;

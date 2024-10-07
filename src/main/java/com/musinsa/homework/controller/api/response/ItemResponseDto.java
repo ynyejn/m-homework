@@ -1,13 +1,13 @@
-package com.musinsa.homework.controller.response;
+package com.musinsa.homework.controller.api.response;
 
 import com.musinsa.homework.entity.Item;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
+import lombok.Getter;
 
 import java.text.NumberFormat;
 import java.util.Locale;
 
-@Data
+@Getter
 @Schema(description = "상품정보")
 public class ItemResponseDto {
     @Schema(description = "브랜드", example = "나이키")

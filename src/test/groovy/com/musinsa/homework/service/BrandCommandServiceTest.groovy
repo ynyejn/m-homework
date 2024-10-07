@@ -1,8 +1,8 @@
 package com.musinsa.homework.service
 
 import com.musinsa.homework.common.exception.ApiException
-import com.musinsa.homework.controller.request.ActionType
-import com.musinsa.homework.controller.request.BrandItemManagementRequestDto
+import com.musinsa.homework.controller.api.request.ActionType
+import com.musinsa.homework.controller.api.request.BrandItemManagementRequestDto
 import com.musinsa.homework.entity.Brand
 import com.musinsa.homework.repository.BrandRepository
 import spock.lang.Specification
@@ -71,11 +71,11 @@ class BrandCommandServiceTest extends Specification {
         brandRepository.existsByName(givenBrandName) >> true
 
         when:
-        def response =  brandCommandService.createBrand(givenBrandName)
+        brandCommandService.createBrand(givenBrandName)
 
         then:
-        response.result == false
-        response.message == "이미 존재하는 브랜드입니다."
+        def e= thrown(ApiException)
+        e.message == "이미 존재하는 브랜드 명입니다."
     }
 
 }

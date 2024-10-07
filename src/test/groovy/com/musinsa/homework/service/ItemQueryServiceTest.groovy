@@ -2,23 +2,25 @@ package com.musinsa.homework.service
 
 import com.musinsa.homework.common.exception.ApiErrorCode
 import com.musinsa.homework.common.exception.ApiException
-import com.musinsa.homework.controller.response.CategoryPriceRangeResponseDto
-import com.musinsa.homework.controller.response.LowestPriceBrandResponseDto
-import com.musinsa.homework.controller.response.LowestPriceByCategoryResponseDto
+import com.musinsa.homework.controller.api.response.CategoryPriceRangeResponseDto
+import com.musinsa.homework.controller.api.response.LowestPriceBrandResponseDto
+import com.musinsa.homework.controller.api.response.LowestPriceByCategoryResponseDto
 import com.musinsa.homework.entity.Brand
 import com.musinsa.homework.entity.Category
 import com.musinsa.homework.entity.Item
+import com.musinsa.homework.repository.BrandRepository
 import com.musinsa.homework.repository.CategoryRepository
 import com.musinsa.homework.repository.item.ItemRepository
 import spock.lang.Specification
 
 class ItemQueryServiceTest extends Specification {
     ItemRepository itemRepository = Mock(ItemRepository)
+    BrandRepository brandRepository = Mock(BrandRepository)
     CategoryRepository categoryRepository = Mock(CategoryRepository)
     ItemQueryService itemQueryService
 
     void setup() {
-        itemQueryService = new ItemQueryService(itemRepository,categoryRepository)
+        itemQueryService = new ItemQueryService(itemRepository,brandRepository,categoryRepository)
     }
     def "getLowestPricesByCategory 호출시 itemRepository의 getLowestPricesByCategory가 호출되고, 데이터가 있는 경우 반환된다."() {
         given:

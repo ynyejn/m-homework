@@ -2,10 +2,10 @@ package com.musinsa.homework.service;
 
 import com.musinsa.homework.common.exception.ApiErrorCode;
 import com.musinsa.homework.common.exception.ApiException;
-import com.musinsa.homework.controller.response.BrandDto;
-import com.musinsa.homework.controller.response.CategoryPriceRangeResponseDto;
-import com.musinsa.homework.controller.response.LowestPriceBrandResponseDto;
-import com.musinsa.homework.controller.response.LowestPriceByCategoryResponseDto;
+import com.musinsa.homework.controller.web.response.BrandDto;
+import com.musinsa.homework.controller.api.response.CategoryPriceRangeResponseDto;
+import com.musinsa.homework.controller.api.response.LowestPriceBrandResponseDto;
+import com.musinsa.homework.controller.api.response.LowestPriceByCategoryResponseDto;
 import com.musinsa.homework.entity.Brand;
 import com.musinsa.homework.entity.Category;
 import com.musinsa.homework.entity.Item;

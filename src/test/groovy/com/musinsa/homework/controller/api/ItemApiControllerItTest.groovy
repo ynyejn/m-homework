@@ -1,4 +1,4 @@
-package com.musinsa.homework.controller
+package com.musinsa.homework.controller.api
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.musinsa.homework.service.ItemQueryService

@@ -2,8 +2,8 @@ package com.musinsa.homework.service;
 
 import com.musinsa.homework.common.exception.ApiErrorCode;
 import com.musinsa.homework.common.exception.ApiException;
-import com.musinsa.homework.controller.request.BrandItemManagementRequestDto;
-import com.musinsa.homework.controller.response.ResultResponseDto;
+import com.musinsa.homework.controller.api.request.BrandItemManagementRequestDto;
+import com.musinsa.homework.controller.api.response.ResultResponseDto;
 import com.musinsa.homework.entity.Brand;
 import com.musinsa.homework.entity.Category;
 import com.musinsa.homework.entity.Item;

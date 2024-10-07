@@ -2,7 +2,7 @@ package com.musinsa.homework.common.config;
 
 import com.musinsa.homework.common.exception.ApiErrorCode;
 import com.musinsa.homework.common.exception.ApiException;
-import com.musinsa.homework.controller.response.ApiResponseWrapper;
+import com.musinsa.homework.controller.api.response.ApiResponseWrapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;

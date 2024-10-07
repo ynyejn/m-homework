@@ -1,6 +1,6 @@
-package com.musinsa.homework.controller;
+package com.musinsa.homework.controller.web;
 
-import com.musinsa.homework.controller.response.BrandDto;
+import com.musinsa.homework.controller.web.response.BrandDto;
 import com.musinsa.homework.entity.Brand;
 import com.musinsa.homework.entity.Category;
 import com.musinsa.homework.entity.Item;
@@ -45,7 +45,7 @@ public class ItemWebController {
 
     // 상품 조회
     @GetMapping("/items")
-    public String getItems(Model model) {
+    public String itemList(Model model) {
         List<BrandDto> brands = itemQueryService.getItemsGroupedByBrand();
         model.addAttribute("brands", brands);
         return "itemList";
@@ -53,7 +53,7 @@ public class ItemWebController {
 
     // 상품 등록 폼
     @GetMapping("/items/new")
-    public String getCreateItemForm(Model model) {
+    public String createForm(Model model) {
         List<Brand> brands = brandQueryService.findAll();
         List<Item> items = itemQueryService.findAll();
         List<Category> categories = items.stream()

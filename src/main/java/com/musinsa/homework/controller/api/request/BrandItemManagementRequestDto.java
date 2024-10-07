@@ -1,4 +1,4 @@
-package com.musinsa.homework.controller.request;
+package com.musinsa.homework.controller.api.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;

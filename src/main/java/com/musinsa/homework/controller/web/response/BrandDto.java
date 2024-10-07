@@ -1,4 +1,4 @@
-package com.musinsa.homework.controller.response;
+package com.musinsa.homework.controller.web.response;
 
 import java.util.Map;
 

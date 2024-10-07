@@ -1,9 +1,9 @@
-package com.musinsa.homework.controller;
+package com.musinsa.homework.controller.api;
 
-import com.musinsa.homework.controller.response.ApiResponseWrapper;
-import com.musinsa.homework.controller.response.CategoryPriceRangeResponseDto;
-import com.musinsa.homework.controller.response.LowestPriceBrandResponseDto;
-import com.musinsa.homework.controller.response.LowestPriceByCategoryResponseDto;
+import com.musinsa.homework.controller.api.response.ApiResponseWrapper;
+import com.musinsa.homework.controller.api.response.CategoryPriceRangeResponseDto;
+import com.musinsa.homework.controller.api.response.LowestPriceBrandResponseDto;
+import com.musinsa.homework.controller.api.response.LowestPriceByCategoryResponseDto;
 import com.musinsa.homework.service.ItemQueryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

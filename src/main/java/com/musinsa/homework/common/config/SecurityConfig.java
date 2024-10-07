@@ -23,7 +23,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
                                 .requestMatchers("/v1/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll()// Swagger 관련 리소스에 대한 접근 허용
-                                .requestMatchers("/page/**").permitAll()              // 페이지 이동을 위한 설정
+                                .requestMatchers("/","/page/**").permitAll()              // 페이지 이동을 위한 설정
                                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll() // 정적 리소스에 대한 접근 허용
                                 .requestMatchers(PathRequest.toH2Console()).permitAll() // h2-console 사용을 위한 설정
                                 .anyRequest().authenticated()
