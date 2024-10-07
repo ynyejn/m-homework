@@ -30,7 +30,7 @@ public class AdminApiController {
     @ApiResponse(responseCode = "400", description = "잘못된 요청", content = @Content(schema = @Schema(implementation = ApiResponseWrapper.WithError.class)))
     @ApiResponse(responseCode = "500", description = "서버 오류", content = @Content(schema = @Schema(implementation = ApiResponseWrapper.WithError.class)))
     public ResponseEntity<ApiResponseWrapper<ResultResponseDto>> manageBrandAndItems(
-             @RequestBody @Valid BrandItemManagementRequestDto request) {
+            @RequestBody @Valid BrandItemManagementRequestDto request) {
         ResultResponseDto response = adminApplicationService.manageBrandAndItems(request);
         return ResponseEntity.ok(ApiResponseWrapper.success(response));
     }

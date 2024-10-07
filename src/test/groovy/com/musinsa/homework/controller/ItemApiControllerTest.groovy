@@ -22,12 +22,9 @@ class ItemApiControllerTest extends Specification {
 
     void setup() {
         itemApiController = new ItemApiController(itemQueryService)
-        mockMvc = MockMvcBuilders.standaloneSetup(itemApiController).build()
-        def exceptionResolver = new ExceptionHandlerExceptionResolver()
-        exceptionResolver.afterPropertiesSet()
         mockMvc = MockMvcBuilders.standaloneSetup(itemApiController)
                 .setControllerAdvice(new GlobalExceptionHandler())
-                .setHandlerExceptionResolvers(exceptionResolver)
+                .setHandlerExceptionResolvers(new ExceptionHandlerExceptionResolver())
                 .build()
     }
 

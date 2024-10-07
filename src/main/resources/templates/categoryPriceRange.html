@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"></div>
+
+    <h2 class="my-4">카테고리별 최저/최고 가격 브랜드 조회</h2>
+
+    <div class="form-group">
+        <label for="categoryName">카테고리 이름:</label>
+        <input type="text" class="form-control" id="categoryName" required>
+    </div>
+    <button id="submitBtn" class="btn btn-primary">Submit</button>
+
+    <div id="resultSection" style="display:none;">
+        <h3 id="categoryTitle" class="mt-4"></h3>
+        <div class="row">
+            <div class="col-md-6">
+                <h4>최저가</h4>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>브랜드</th>
+                        <th>가격</th>
+                    </tr>
+                    </thead>
+                    <tbody id="lowestPriceBody"></tbody>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <h4>최고가</h4>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>브랜드</th>
+                        <th>가격</th>
+                    </tr>
+                    </thead>
+                    <tbody id="highestPriceBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="errorSection" style="display:none; color: red;">
+        <h3 id="errorMessage"></h3>
+    </div>
+
+    <a href="/page" class="btn btn-primary mt-3">홈으로</a>
+
+    <div th:replace="fragments/footer :: footer"></div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('#submitBtn').click(function() {
+            var categoryName = $('#categoryName').val();
+            if (!categoryName) {
+                alert('카테고리 이름을 입력해주세요.');
+                return;
+            }
+
+            $.ajax({
+                url: '/v1/items/categories/' + encodeURIComponent(categoryName) + '/prices',
+                method: 'GET',
+                success: function(response) {
+                    if (response.success) {
+                        var data = response.data;
+                        $('#categoryTitle').text(data.카테고리 + ' 카테고리 가격 정보');
+
+                        displayPriceInfo(data.최저가, '#lowestPriceBody');
+                        displayPriceInfo(data.최고가, '#highestPriceBody');
+
+                        $('#resultSection').show();
+                        $('#errorSection').hide();
+                    } else {
+                        showError('데이터를 불러오는데 실패했습니다.');
+                    }
+                },
+                error: function(xhr) {
+                    if (xhr.status === 404) {
+                        showError('잘못된 요청입니다. 카테고리 이름을 확인해주세요.');
+                    } else {
+                        showError('서버와의 통신에 실패했습니다.');
+                    }
+                }
+            });
+        });
+
+        function displayPriceInfo(priceInfo, tableBodyId) {
+            var tableBody = $(tableBodyId);
+            tableBody.empty();
+            priceInfo.forEach(function(item) {
+                tableBody.append(
+                    '<tr>' +
+                    '<td>' + item.브랜드 + '</td>' +
+                    '<td>' + item.가격 + '원</td>' +
+                    '</tr>'
+                );
+            });
+        }
+
+        function showError(message) {
+            $('#errorMessage').text(message);
+            $('#errorSection').show();
+            $('#resultSection').hide();
+        }
+    });
+</script>
+</body>
+</html>

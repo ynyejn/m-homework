@@ -14,7 +14,8 @@ public enum ApiErrorCode {
     BRAND_NOT_FOUND(HttpStatus.NOT_FOUND, "BRAND_NOT_FOUND", "해당 브랜드를 찾을 수 없습니다."),
     ITEM_NOT_FOUND(HttpStatus.NOT_FOUND, "ITEM_NOT_FOUND", "해당 아이템을 찾을 수 없습니다."),
     NOT_ALLOW_ACTION(HttpStatus.BAD_REQUEST, "NOT_ALLOW_ACTION", "허용되지 않은 액션입니다."),
-    UNKNOWN(HttpStatus.INTERNAL_SERVER_ERROR, "UNKNOWN", "알 수 없는 에러입니다.");
+    UNKNOWN(HttpStatus.INTERNAL_SERVER_ERROR, "UNKNOWN", "알 수 없는 에러입니다."),
+    DUPLICATED_BRAND_NAME(HttpStatus.BAD_REQUEST, "DUPLICATED_BRAND_NAME", "이미 존재하는 브랜드 이름입니다.");
 
     private final HttpStatus httpStatus;
     private final String code;

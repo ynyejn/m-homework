@@ -15,10 +15,10 @@ public class AdminApplicationService {
 
     @Transactional
     public ResultResponseDto manageBrandAndItems(BrandItemManagementRequestDto request) {
-        ResultResponseDto result = ResultResponseDto.fail("요청이 잘못되었습니다.");
+        ResultResponseDto result = null;
         if (request.getBrandOperation() != null) {
             result = brandService.processBrandOperation(request.getBrandOperation());
-        }else if (request.getItemOperation() != null)
+        } else if (request.getItemOperation() != null)
             result = itemService.processItemOperation(request.getItemOperation());
         return result;
     }

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class BrandCommandService {
     private final BrandRepository brandRepository;
+
     @Transactional
     public ResultResponseDto processBrandOperation(BrandItemManagementRequestDto.BrandOperation operation) {
         switch (operation.getAction()) {
@@ -26,7 +27,7 @@ public class BrandCommandService {
 
     private ResultResponseDto createBrand(String brandName) {
         if (brandRepository.existsByName(brandName)) {
-            return ResultResponseDto.fail("이미 존재하는 브랜드입니다.");
+            throw new ApiException(ApiErrorCode.DUPLICATED_BRAND_NAME);
         }
 
         Brand brand = new Brand(brandName);

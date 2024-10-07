@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header"/>
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"></div>
+
+    <h2 class="my-4">브랜드/상품 관리</h2>
+
+    <form id="managementForm">
+        <div class="form-group">
+            <label for="operationType">작업 타입:</label>
+            <select class="form-control" id="operationType" required>
+                <option value="">선택하세요</option>
+                <option value="brand">브랜드</option>
+                <option value="item">상품</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="actionType">작업:</label>
+            <select class="form-control" id="actionType" required>
+                <option value="">선택하세요</option>
+                <option value="CREATE">생성</option>
+                <option value="UPDATE">수정</option>
+                <option value="DELETE">삭제</option>
+            </select>
+        </div>
+
+        <div id="brandFields" style="display: none;">
+            <div class="form-group">
+                <label for="brandName">브랜드 이름:</label>
+                <input type="text" class="form-control" id="brandName">
+            </div>
+        </div>
+
+        <div id="itemFields" style="display: none;">
+            <div class="form-group"  id="itemIdField">
+                <label for="itemId">상품 ID (수정/삭제 시):</label>
+                <select id="itemId" class="form-control">
+                    <option th:each="item : ${items}" th:value="${item.id}"
+                            th:text="${item.brand.name + '/' + item.category.name + '/' + item.price + '원'}"
+                            th:attr="data-price=${item.price}, data-brand-id=${item.brand.id}, data-category-id=${item.category.id}">
+                        </option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="brandId">브랜드 ID:</label>
+                <select id="brandId" class="form-control">
+                    <option th:each="brand : ${brands}" th:value="${brand.id}" th:text="${brand.name}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="categoryId">카테고리 ID:</label>
+                <select id="categoryId" class="form-control">
+                    <option th:each="category : ${categories}" th:value="${category.id}"
+                            th:text="${category.name}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="price">가격:</label>
+                <input type="number" class="form-control" id="price" min="0">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">제출</button>
+    </form>
+
+    <a href="/" class="btn btn-secondary mt-3">홈으로</a>
+
+    <div th:replace="fragments/footer :: footer"></div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#itemId').change(function() {
+            var selectedOption = $(this).find('option:selected');
+            var brandId = selectedOption.data('brand-id');
+            var categoryId = selectedOption.data('category-id');
+            var price = selectedOption.data('price');
+
+            $('#brandId').val(brandId);
+            $('#categoryId').val(categoryId);
+            $('#price').val(price);
+        });
+
+        function updateFieldVisibility() {
+            var operationType = $('#operationType').val();
+            var actionType = $('#actionType').val();
+
+            $('#brandFields').hide();
+            $('#itemFields').hide();
+            $('#itemIdField').show();
+
+            if (operationType === 'brand') {
+                $('#brandFields').show();
+                $("#actionType").val('CREATE');
+                $('#actionType option[value="UPDATE"]').hide();
+                $('#actionType option[value="DELETE"]').hide();
+            } else if (operationType === 'item') {
+                $('#actionType option[value="UPDATE"]').show();
+                $('#actionType option[value="DELETE"]').show();
+                if (actionType) {
+                    $('#itemFields').show();
+                    if (actionType === 'CREATE') {
+                        $('#itemIdField').hide();
+                    }
+                    updateFieldEditability();
+                }
+            } else {
+                $('#actionType option[value="UPDATE"]').show();
+                $('#actionType option[value="DELETE"]').show();
+            }
+        }
+        function updateFieldEditability() {
+            var actionType = $('#actionType').val();
+            var isDeleteAction = actionType === 'DELETE';
+
+            $('#brandId').prop('disabled', isDeleteAction);
+            $('#categoryId').prop('disabled', isDeleteAction);
+            $('#price').prop('readonly', isDeleteAction);
+        }
+
+        $('#operationType, #actionType').change(updateFieldVisibility);
+
+
+
+        $('#managementForm').submit(function (e) {
+            e.preventDefault();
+            var operationType = $('#operationType').val();
+            var actionType = $('#actionType').val();
+            var data = {};
+
+            if (operationType === 'brand') {
+                data.brandOperation = {
+                    action: actionType,
+                    brandName: $('#brandName').val()
+                };
+            } else if (operationType === 'item') {
+                data.itemOperation = {
+                    action: actionType,
+                    itemId: $('#itemId').val() ? parseInt($('#itemId').val()) : null,
+                    brandId: parseInt($('#brandId').val()),
+                    categoryId: parseInt($('#categoryId').val()),
+                    price: parseInt($('#price').val())
+                };
+            }
+
+            $.ajax({
+                url: '/v1/admin/brand-item-management',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(data),
+                success: function (response) {
+                    if (response.success) {
+                        alert('작업이 성공적으로 수행되었습니다.');
+                        location.href = '/page/items';
+                    } else {
+                        alert('작업 수행 중 오류가 발생했습니다: ' + response.message);
+                    }
+                },
+                error: function (xhr) {
+                    var errorMessage = '서버 오류가 발생했습니다.';
+                    if (xhr.responseJSON && xhr.responseJSON.message) {
+                        errorMessage = xhr.responseJSON.message;
+                    }
+                    alert(errorMessage);
+                }
+            });
+
+        });
+    });
+</script>
+</body>
+</html>

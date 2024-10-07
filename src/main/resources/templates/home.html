@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+    <title>MUSINSA API</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+        .jumbotron {
+            background-color: #f8f9fa !important;
+            padding: 2rem 1rem !important;
+            border-radius: 0.3rem !important;
+            text-align: center !important;
+        }
+
+        .jumbotron h1 {
+            font-size: 2.5rem !important;
+            margin-bottom: 1rem !important;
+        }
+
+        .jumbotron p.lead {
+            font-size: 1.5rem !important;
+            ma 리rgin-bottom: 1rem !important;
+        }
+
+        .jumbotron .btn {
+            padding: 0.75rem 1.5rem !important;
+            font-size: 1.25rem !important;
+            width: 80% !important;
+            max-width: 300px !important;
+            margin-bottom: 1rem !important;
+        }
+
+        .jumbotron p {
+            margin-bottom: 2rem !important;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+    <div class="jumbotron mx-auto">
+        <h1>MUSINSA API</h1>
+
+        <p class="lead">API1</p>
+        <p>
+            <a class="btn btn-lg btn-secondary" href="/page/items/lowest-prices">카테고리 별 최저가격</a>
+        </p>
+
+        <p class="lead">API2</p>
+        <p>
+            <a class="btn btn-lg btn-dark" href="/page/items/lowest-price-brand">단일 브랜드 최저가격</a>
+        </p>
+
+        <p class="lead">API3</p>
+        <p>
+            <a class="btn btn-lg btn-info" href="/page/items/categories/prices">카테고리별 최저/최고 가격 브랜드 조회</a>
+        </p>
+
+        <p class="lead">API4</p>
+        <p>
+            <a class="btn btn-lg btn-warning" href="/page/items">상품 리스트</a>
+        </p>
+    </div>
+    <div th:replace="fragments/footer :: footer"/>
+</div> <!-- /container -->
+</body>
+</html>

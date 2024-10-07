@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header"/>
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+    <div>
+        <!-- Add 버튼 추가 -->
+        <div class="mb-3">
+            <a class="btn btn-success" href="/page/items/new">추가/수정/삭제</a>
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>브랜드</th>
+                <th>상의</th>
+                <th>아우터</th>
+                <th>바지</th>
+                <th>스니커즈</th>
+                <th>가방</th>
+                <th>모자</th>
+                <th>양말</th>
+                <th>액세서리</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="brand : ${brands}">
+                <td th:text="${brand.name}"></td>
+                <td th:text="${brand.prices['상의']}"></td>
+                <td th:text="${brand.prices['아우터']}"></td>
+                <td th:text="${brand.prices['바지']}"></td>
+                <td th:text="${brand.prices['스니커즈']}"></td>
+                <td th:text="${brand.prices['가방']}"></td>
+                <td th:text="${brand.prices['모자']}"></td>
+                <td th:text="${brand.prices['양말']}"></td>
+                <td th:text="${brand.prices['액세서리']}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:replace="fragments/footer :: footer"/>
+</div> <!-- /container -->
+</body>
+</html>

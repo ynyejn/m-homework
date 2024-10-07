@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"></div>
+
+    <h2 class="my-4">단일 브랜드 최저가격</h2>
+
+    <h3 id="brandName"></h3>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>카테고리</th>
+            <th>가격</th>
+        </tr>
+        </thead>
+        <tbody id="categoryPricesBody">
+        <!-- Data will be inserted here by JavaScript -->
+        </tbody>
+        <tfoot>
+        <tr>
+            <th>총액</th>
+            <td id="totalPrice"></td>
+        </tr>
+        </tfoot>
+    </table>
+
+    <a href="/page" class="btn btn-primary">홈으로</a>
+
+    <div th:replace="fragments/footer :: footer"></div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            url: '/v1/items/lowest-price-brand',
+            method: 'GET',
+            success: function(response) {
+                if (response.success) {
+                    var data = response.data.최저가;
+                    $('#brandName').text('브랜드: ' + data.브랜드);
+
+                    var tableBody = $('#categoryPricesBody');
+                    data.카테고리.forEach(function(item) {
+                        tableBody.append(
+                            '<tr>' +
+                            '<td>' + item.카테고리 + '</td>' +
+                            '<td>' + item.가격 + '원</td>' +
+                            '</tr>'
+                        );
+                    });
+
+                    $('#totalPrice').text(data.총액 + '원');
+                } else {
+                    alert('데이터를 불러오는데 실패했습니다.');
+                }
+            },
+            error: function() {
+                alert('서버와의 통신에 실패했습니다.');
+            }
+        });
+    });
+</script>
+</body>
+</html>
