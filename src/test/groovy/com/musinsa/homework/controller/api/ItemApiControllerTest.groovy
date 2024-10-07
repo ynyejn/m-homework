@@ -1,6 +1,6 @@
 package com.musinsa.homework.controller.api
 
-import com.musinsa.homework.common.config.GlobalExceptionHandler
+import com.musinsa.homework.common.exception.GlobalExceptionHandler
 import com.musinsa.homework.controller.api.response.CategoryPriceRangeResponseDto
 import com.musinsa.homework.controller.api.response.LowestPriceBrandResponseDto
 import com.musinsa.homework.controller.api.response.LowestPriceByCategoryResponseDto

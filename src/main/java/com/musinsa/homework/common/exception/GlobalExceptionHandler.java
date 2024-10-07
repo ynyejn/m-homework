@@ -1,7 +1,5 @@
-package com.musinsa.homework.common.config;
+package com.musinsa.homework.common.exception;
 
-import com.musinsa.homework.common.exception.ApiErrorCode;
-import com.musinsa.homework.common.exception.ApiException;
 import com.musinsa.homework.controller.api.response.ApiResponseWrapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
